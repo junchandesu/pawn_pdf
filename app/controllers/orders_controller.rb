@@ -13,11 +13,12 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html # show.thml.erb
       format.pdf do 
-        pdf = Prawn::Document.new
-        # set up font(japanese)
-        pdf.font "vendor/fonts/ipaexm.ttf" 
-        pdf.text "Hello, Prawn!"
-        pdf.text "こんにちは、プローン"
+        # pdf = Prawn::Document.new
+        pdf = OrderPDF.new(@order)
+        # # set up font(japanese)
+        # pdf.font "vendor/fonts/ipaexm.ttf" 
+        # pdf.text "Hello, Prawn!"
+        # pdf.text "こんにちは、プローン"
         # 画面にPDFを表示する
         # disposition: "inline" によりPDFはダウンロードではなく画面に表示される
         send_data pdf.render,
