@@ -1,0 +1,1 @@
+http://ruby-rails.hatenadiary.com/entry/20140907/1410078997
