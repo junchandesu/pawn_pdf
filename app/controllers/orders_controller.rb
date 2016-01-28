@@ -9,22 +9,24 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   # GET /orders/1.json
-  def show
+   def show
     respond_to do |format|
-      format.html # show.thml.erb
-      format.pdf do 
-        # pdf = Prawn::Document.new
-        pdf = OrderPDF.new(@order)
-        # # set up font(japanese)
-        # pdf.font "vendor/fonts/ipaexm.ttf" 
-        # pdf.text "Hello, Prawn!"
-        # pdf.text "こんにちは、プローン"
+      format.html # show.html.erb
+      format.pdf do
+        # 詳細画面のHTMLを取得
+        html = render_to_string template: "orders/show"
+
+        # PDFKitを作成
+        pdf = PDFKit.new(html, encoding: "UTF-8")
+
         # 画面にPDFを表示する
+        # to_pdfメソッドでPDFファイルに変換する
+        # 他には、to_fileメソッドでPDFファイルを作成できる
         # disposition: "inline" によりPDFはダウンロードではなく画面に表示される
-        send_data pdf.render,
-        filename: "#{@order.id}",
-        type: "application/pdf",
-        disposition: "inline"
+        send_data pdf.to_pdf,
+          filename:    "#{@order.id}.pdf",
+          type:        "application/pdf",
+          disposition: "inline"
       end
     end
   end

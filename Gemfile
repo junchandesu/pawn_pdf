@@ -31,6 +31,8 @@ gem 'twitter-bootstrap-rails'
 # For PDF generation
 gem 'prawn'        # PDF creation
 gem 'prawn-table'  # PDF table creation
+gem 'pdfkit'       # wkhtmtopdfのラッパー
+gem 'wkhtmltopdf'  # HTMLをPDFに変換するツール
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
